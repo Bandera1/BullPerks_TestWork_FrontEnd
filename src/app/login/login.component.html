@@ -1,17 +1,17 @@
 <div class="login">
   <div class="login-page">
-    <div #loginForm class="form">
-      <form class="register-form">
+    <div class="form">
+      <form action="#" class="register-form">
         <input type="text" placeholder="name" />
         <input type="password" placeholder="password" />
         <input type="text" placeholder="email address" />
         <button>create</button>
         <p class="message">Already registered? <a #createAccountButton1 href="javascript:void(0);">Sign In</a></p>
       </form>
-      <form class="login-form">
-        <input type="text" placeholder="username" />
-        <input type="password" placeholder="password" />
-        <button>login</button>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
+        <input formControlName="email" type="text" placeholder="email@gmail.com" required/>
+        <input formControlName="password" type="password" placeholder="password" required />
+        <button type="submit">login</button>
         <p class="message">Not registered? <a #createAccountButton2 href="javascript:void(0);">Create an account</a></p>
       </form>
     </div>
