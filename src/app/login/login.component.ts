@@ -16,11 +16,24 @@ export class LoginComponent {
   @ViewChild('createAccountButton2')
   createAccountButton2: ElementRef<HTMLInputElement>;
 
-  form: FormGroup;
+  formLogin: FormGroup;
+  formRegister: FormGroup;
   aSab: Subscription = new Subscription();
 
   constructor(private authService: AuthService, private router: Router) {
-    this.form = new FormGroup({
+    this.formLogin = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+    });
+
+    this.formRegister = new FormGroup({
+      name: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [
         Validators.required,
@@ -40,15 +53,26 @@ export class LoginComponent {
     );
   }
 
-  onSubmit() {
-console.log(this.form.value);
+  onSubmitLogin() {
+    console.log(this.formLogin.value);
 
     this.aSab = this.authService
-      .login(this.form.value)
+      .login(this.formLogin.value)
       .subscribe((token: any) => {
         console.log('Login succesed, token - ', token);
         this.router.navigate(['/admin']);
       });
+  }
+
+  onSubmitRegister() {
+    console.log(this.formRegister.value);
+
+     this.aSab = this.authService
+       .register(this.formRegister.value)
+       .subscribe((token: any) => {
+         console.log('Register succesed, token - ', token);
+         this.router.navigate(['/admin']);
+       });
   }
 
   ngOnDestroy() {

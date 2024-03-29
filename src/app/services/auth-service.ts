@@ -2,7 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map } from "rxjs";
 import { LoginUser } from "../models/login-user";
-import { LOGIN_API } from "../constants/backEnd-api";
+import { LOGIN_API, REGISTER_API } from "../constants/backEnd-api";
+import { RegisterUser } from "../models/register-user";
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,16 @@ export class AuthService {
     if (tkn) {
       this.setToken(tkn);
     }
+  }
+
+  register(user: RegisterUser): any {
+    return this.http.post<{ token: string }>(REGISTER_API, user).pipe(
+      map((token) => {
+        localStorage.setItem('auth-token', token.toString());
+        this.setToken(token);
+        return token;
+      })
+    );
   }
 
   login(user: LoginUser): any {
