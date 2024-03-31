@@ -60,7 +60,7 @@ export class LoginComponent {
       .login(this.formLogin.value)
       .subscribe((token: any) => {
         console.log('Login succesed, token - ', token);
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/table']);
       });
   }
 
@@ -71,7 +71,7 @@ export class LoginComponent {
        .register(this.formRegister.value)
        .subscribe((token: any) => {
          console.log('Register succesed, token - ', token);
-         this.router.navigate(['/admin']);
+         this.router.navigate(['/table']);
        });
   }
 

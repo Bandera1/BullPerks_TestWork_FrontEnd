@@ -1,0 +1,34 @@
+<header class="token-view">
+  <a href="/table" class="logo">BLP Token view</a>
+  <nav>
+    <a href="/login">Login</a>
+  </nav>
+</header>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 data-table">
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="totalSupply">
+    <th mat-header-cell *matHeaderCellDef> Total Supply </th>
+    <td mat-cell *matCellDef="let element"> {{element.totalSupply}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="circulatingSupply">
+    <th mat-header-cell *matHeaderCellDef> Circulating Supply </th>
+    <td mat-cell *matCellDef="let element"> {{element.circulatingSupply}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<footer class="footer">
+  <a href="/table" class="logo">BLP Token view</a>
+  <nav>
+    <a href="/login">Login</a>
+  </nav>
+</footer>
