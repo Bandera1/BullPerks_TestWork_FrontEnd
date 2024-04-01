@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BLPToken } from "../models/blp-token";
 import { CALCULATE_TOKENS_SUPPLY_API, LOAD_ALL_BLP_TOKENS_API } from "../constants/backEnd-api";
 import { HttpClient } from "@angular/common/http";
-import { Observable, map, switchMap, of } from "rxjs";
+import { Observable, map, switchMap, of, catchError, throwError } from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class TokenService {
         this.tokens = _tokens;
 
         return _tokens;
-      })
+      }), catchError(err => throwError(err))
     );
   }
 
@@ -37,7 +37,8 @@ export class TokenService {
          this.tokens = _tokens;
 
          return _tokens;
-       })
+       }),
+       catchError((err) => throwError(err))
      );
   }
 }

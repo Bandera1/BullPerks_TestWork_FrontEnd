@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, catchError } from 'rxjs';
 import { AuthService } from '../services/auth-service';
 import { Router } from '@angular/router';
 console.log(`jQuery version: ${$.fn.jquery}`);
@@ -25,7 +25,7 @@ export class LoginComponent {
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(6)
       ]),
     });
 
@@ -61,18 +61,23 @@ export class LoginComponent {
       .subscribe((token: any) => {
         console.log('Login succesed, token - ', token);
         this.router.navigate(['/table']);
+      }, (err: any) => {
+        alert("Wrong credentials");
       });
   }
 
   onSubmitRegister() {
     console.log(this.formRegister.value);
 
-     this.aSab = this.authService
-       .register(this.formRegister.value)
-       .subscribe((token: any) => {
+     this.aSab = this.authService.register(this.formRegister.value).subscribe(
+       (token: any) => {
          console.log('Register succesed, token - ', token);
          this.router.navigate(['/table']);
-       });
+       },
+       (err: any) => {
+         alert('There is something error');
+       }
+     );
   }
 
   ngOnDestroy() {

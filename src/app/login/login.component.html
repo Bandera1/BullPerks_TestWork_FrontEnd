@@ -3,14 +3,38 @@
     <div class="form">
       <form [formGroup]="formRegister" (ngSubmit)="onSubmitRegister()" class="register-form">
         <input type="text" formControlName="email" placeholder="email@gmail.com" />
+        <span *ngIf="formRegister.get('email')?.invalid && formRegister.get('email')?.touched">
+          <span *ngIf="formRegister.get('email')?.errors!['required'] || formRegister.get('email')?.errors!['email']"
+            class="error-text">Enter correct email</span>
+        </span>
+
         <input type="password" formControlName="password" placeholder="Password" />
+        <span *ngIf="formRegister.get('password')?.invalid && formRegister.get('password')?.touched">
+          <span
+            *ngIf="formRegister.get('password')?.errors!['required'] ||
+            formRegister.get('password')?.errors!['password']"
+            class="error-text">Enter correct password</span>
+        </span>
+
         <input type="text" formControlName="name" placeholder="Name" />
+         <span *ngIf="formRegister.get('name')?.invalid && formRegister.get('name')?.touched">
+           <span *ngIf="formRegister.get('name')?.errors!['required'] ||
+            formRegister.get('name')?.errors!['name']" class="error-text">Enter correct name</span>
+         </span>
+
         <button type="submit">create</button>
         <p class="message">Already registered? <a #createAccountButton1 href="javascript:void(0);">Sign In</a></p>
       </form>
       <form [formGroup]="formLogin" (ngSubmit)="onSubmitLogin()" class="login-form">
         <input formControlName="email" type="text" placeholder="email@gmail.com" required/>
+         <span *ngIf="formLogin.get('email')?.invalid && formLogin.get('email')?.touched">
+           <span *ngIf="formLogin.get('email')?.errors!['required'] || formLogin.get('email')?.errors!['email']"
+             class="error-text">Enter correct email</span>
+         </span>
         <input formControlName="password" type="password" placeholder="Password" required />
+         <span *ngIf="formLogin.get('password')?.invalid && formLogin.get('password')?.touched">
+           <span *ngIf="formLogin.get('password')?.errors!['required']" class="error-text">Enter correct password</span>
+         </span>
         <button type="submit">login</button>
         <p class="message">Not registered? <a #createAccountButton2 href="javascript:void(0);">Create an account</a></p>
       </form>
