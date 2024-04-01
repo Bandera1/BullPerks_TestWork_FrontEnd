@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BLPToken } from "../models/blp-token";
-import { LOAD_ALL_BLP_TOKENS_API } from "../constants/backEnd-api";
+import { CALCULATE_TOKENS_SUPPLY_API, LOAD_ALL_BLP_TOKENS_API } from "../constants/backEnd-api";
 import { HttpClient } from "@angular/common/http";
 import { Observable, map, switchMap, of } from "rxjs";
 
@@ -29,5 +29,15 @@ export class TokenService {
         return _tokens;
       })
     );
+  }
+
+  public LoadTokensSupply() {
+     return this.http.post<BLPToken[]>(CALCULATE_TOKENS_SUPPLY_API, null).pipe(
+       map((_tokens) => {
+         this.tokens = _tokens;
+
+         return _tokens;
+       })
+     );
   }
 }

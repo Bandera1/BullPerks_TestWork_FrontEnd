@@ -27,8 +27,10 @@
 </table>
 
 <footer class="footer">
-  <a href="/table" class="logo">BLP Token view</a>
-  <nav>
-    <a href="/login">Login</a>
-  </nav>
+  <button class="btn" (click)="clearTable()">Clear table</button>
+  <button class="btn ml-1" (click)="reloadTokens()">Reload tokens</button>
+  <button class="btn ml-1"
+  matTooltip="You must be authenticated for this action"
+  [matTooltipPosition]="'above'"
+    (click)="loadSupply()">Load supply</button>
 </footer>

@@ -14,6 +14,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenViewComponent } from './token-view/token-view.component';
 import { TokenInterceptor } from './utils/token-interceptor';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, TokenViewComponent],
@@ -26,7 +29,9 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatButtonModule,
+    MatTooltipModule
   ],
   providers: [
     provideAnimationsAsync(),

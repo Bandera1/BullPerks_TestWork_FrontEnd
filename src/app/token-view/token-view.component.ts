@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TokenService } from '../services/token-service';
 import { BLPToken } from '../models/blp-token';
 import { Subscription } from 'rxjs';
-
+import { AuthService } from '../services/auth-service';
 
 export interface PeriodicElement {
   name: string;
@@ -21,16 +21,40 @@ export class TokenViewComponent {
   dataSource: BLPToken[];
   aSab: Subscription = new Subscription();
 
-  displayProgressSpinner: boolean;
+  constructor(private tokenService: TokenService, private authService: AuthService) {
 
-  constructor(private tokenService: TokenService) {}
+  }
 
   ngOnInit() {
-    this.displayProgressSpinner = true;
+    this.reloadTokens();
+  }
+
+  clearTable() {
+    if (!this.dataSource.length) {
+      alert('Table already empty');
+      return;
+    }
+
+    this.dataSource = [];
+  }
+
+  reloadTokens() {
     this.aSab = this.tokenService.getTokens().subscribe((tokens: any) => {
       this.dataSource = tokens;
-      this.displayProgressSpinner = false;
     });
+  }
+
+  loadSupply() {
+    if(!this.authService.isAuthenticated()) {
+      alert('You have to be authenticated to load supply');
+      return;
+    }
+
+    this.aSab = this.tokenService
+      .LoadTokensSupply()
+      .subscribe((tokens: any) => {
+        this.dataSource = tokens;
+      });
   }
 
   ngOnDestroy() {

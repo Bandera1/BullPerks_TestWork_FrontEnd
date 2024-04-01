@@ -67,10 +67,42 @@ section:nth-child(odd) {
   bottom: 0;
   height: 5%;
   width: 100%;
-  background-color: gray;
+  background-color: rgb(32, 44, 44);
   color: white;
   display: flex;
-  justify-content: space-between;
+  justify-content: baseline;
   align-items: center;
   z-index: 100;
+  padding: 20px;
+}
+
+.ml-1 {
+  margin-left: 15px;
+}
+
+.btn {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 14px 24px;
+  border: none;
+  transition: box-shadow 0.2s ease 0s,
+  -ms-transform 0.1s ease 0s,
+  -webkit-transform 0.1s ease 0s,
+  transform 0.1s ease 0s;
+  background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
+  color: #fff !important;
+}
+
+.btn:hover {
+  background: rgba(231, 31, 31, 0.568)
+}
+
+.btn:active {
+  background-color: rgba(226, 58, 58, 0.568);
+  transform: translateY(1px);
 }
